@@ -1,1 +1,11 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
+.simbol {
+  font-size: 6vw;
+}
+
+.display-1 {
+  font-size: 15vw;
+}
+
+.btn-warning {
+  font-size: 3vw;
+}
