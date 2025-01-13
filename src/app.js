@@ -2,37 +2,63 @@ import "bootstrap";
 import "./style.css";
 
 window.onload = function() {
-  const simbolos = ["♦", "♥", "♠", "♣"];
-  const numeros = [
-    "A",
-    ...Array.from({ length: 9 }, (_, i) => i + 2),
-    "J",
-    "Q",
-    "K"
-  ];
+  //write your code here
+  const randomNumber = document.querySelector("#number");
+  let randomCard = () => {
+    let results = Math.floor(Math.random() * 10 + 4);
+    if (results == 11) results = "J";
+    if (results == 12) results = "Q";
+    if (results == 13) results = "K";
+    if (results == 14) results = "A";
 
-  const btnGenerar = document.getElementById("btnGenrar");
-  const simbolTop = document.querySelectorAll("#simbol")[0];
-  const simbolBottom = document.querySelectorAll("#simbol")[1];
-  const numberElement = document.getElementById("number");
+    return results;
+  };
+  randomNumber.innerHTML = `<h1>${randomCard()}</h1>`;
 
-  function generarCarta() {
-    const simboloAleatorio =
-      simbolos[Math.floor(Math.random() * simbolos.length)];
-    const numeroAleatorio = numeros[Math.floor(Math.random() * numeros.length)];
+  const figuraSup = document.querySelector("#figura1");
+  let randomSimb = () => {
+    let result = Math.floor(Math.random() * 4 + 1);
+    if (result == 1) result = "♦";
+    if (result == 2) result = "♥";
+    if (result == 3) result = "♠";
+    if (result == 4) result = "♣";
 
-    simbolTop.textContent = simboloAleatorio;
-    simbolBottom.textContent = simboloAleatorio;
-    numberElement.textContent = numeroAleatorio;
+    return result;
+  };
 
-    const color =
-      simboloAleatorio === "♦" || simboloAleatorio === "♥" ? "red" : "black";
-    simbolTop.style.color = color;
-    simbolBottom.style.color = color;
-    numberElement.style.color = color;
+  const simboloFinal = randomSimb();
+  figuraSup.innerHTML = `<h1>${simboloFinal}</h1>`;
+  const figuraInf = document.querySelector("#figura2");
+  figuraInf.innerHTML = `<h1>${simboloFinal}</h1>`;
+
+  if (simboloFinal == "♦" || simboloFinal == "♥") {
+    figuraSup.style.color = "red";
+    figuraInf.style.color = "red";
   }
 
-  btnGenerar.addEventListener("click", generarCarta);
+  const boton = document.createElement("button");
+  boton.innerText = "Actualizar carta";
+  boton.classList.add("my-button-class");
 
-  generarCarta();
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container");
+  buttonContainer.appendChild(boton);
+
+  boton.addEventListener("click", event => {
+    location.reload(event);
+  });
+
+  function redimensionar() {
+    console.log("redimensione");
+    let ancho = document.getElementById("ancho").value;
+    console.log("ancho", ancho);
+    let alto = document.getElementById("alto").value;
+    console.log("alto", alto);
+    //Llamo al elemento carta para modificar ancho y alto
+    document.getElementById("carta").style.width = `${ancho}px`;
+    document.getElementById("carta").style.height = `${alto}px`;
+  }
+  document.getElementById("redimensionarCarta").addEventListener("click", e => {
+    redimensionar();
+  });
 };

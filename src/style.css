@@ -1,11 +1,35 @@
-.simbol {
-  font-size: 6vw;
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+#carta {
+  height: 500px;
+  width: 350px;
+  border-radius: 5%;
 }
 
-.display-1 {
-  font-size: 15vw;
+#figura2 > h1 {
+  transform: rotate(180deg);
+  font-size: 6rem;
+  background-color: #ffffff;
 }
-
-.btn-warning {
-  font-size: 3vw;
+#figura1 > h1 {
+  font-size: 6rem;
+  background-color: #ffffff;
+}
+#number > h1 {
+  font-size: 6rem;
+  background-color: #ffffff;
+}
+.label {
+  margin-top: 50px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+.my-button-class {
+  background-color: #0dcaf0;
+  color: black;
+  padding: 10px;
+  border: aliceblue;
+  border-radius: 10px;
 }
