@@ -2,8 +2,12 @@ import "bootstrap";
 import "./style.css";
 
 window.onload = function() {
-  //write your code here
   const randomNumber = document.querySelector("#number");
+  const figuraSup = document.querySelector("#figura1");
+  const figuraInf = document.querySelector("#figura2");
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container");
+
   let randomCard = () => {
     let results = Math.floor(Math.random() * 10 + 4);
     if (results == 11) results = "J";
@@ -13,9 +17,7 @@ window.onload = function() {
 
     return results;
   };
-  randomNumber.innerHTML = `<h1>${randomCard()}</h1>`;
 
-  const figuraSup = document.querySelector("#figura1");
   let randomSimb = () => {
     let result = Math.floor(Math.random() * 4 + 1);
     if (result == 1) result = "♦";
@@ -27,11 +29,11 @@ window.onload = function() {
   };
 
   const simboloFinal = randomSimb();
+  randomNumber.innerHTML = `<h1>${randomCard()}</h1>`;
   figuraSup.innerHTML = `<h1>${simboloFinal}</h1>`;
-  const figuraInf = document.querySelector("#figura2");
   figuraInf.innerHTML = `<h1>${simboloFinal}</h1>`;
 
-  if (simboloFinal == "♦" || simboloFinal == "♥") {
+  if (simboloFinal === "♦" || simboloFinal === "♥") {
     figuraSup.style.color = "red";
     figuraInf.style.color = "red";
   }
@@ -40,12 +42,23 @@ window.onload = function() {
   boton.innerText = "Actualizar carta";
   boton.classList.add("my-button-class");
 
-  const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("button-container");
   buttonContainer.appendChild(boton);
+  document.body.appendChild(buttonContainer);
 
-  boton.addEventListener("click", event => {
-    location.reload(event);
+  boton.addEventListener("click", () => {
+    const newSimboloFinal = randomSimb();
+    const newNumber = randomCard();
+    randomNumber.innerHTML = `<h1>${newNumber}</h1>`;
+    figuraSup.innerHTML = `<h1>${newSimboloFinal}</h1>`;
+    figuraInf.innerHTML = `<h1>${newSimboloFinal}</h1>`;
+
+    if (newSimboloFinal === "♦" || newSimboloFinal === "♥") {
+      figuraSup.style.color = "red";
+      figuraInf.style.color = "red";
+    } else {
+      figuraSup.style.color = "black";
+      figuraInf.style.color = "black";
+    }
   });
 
   function redimensionar() {
@@ -54,10 +67,11 @@ window.onload = function() {
     console.log("ancho", ancho);
     let alto = document.getElementById("alto").value;
     console.log("alto", alto);
-    //Llamo al elemento carta para modificar ancho y alto
+
     document.getElementById("carta").style.width = `${ancho}px`;
     document.getElementById("carta").style.height = `${alto}px`;
   }
+
   document.getElementById("redimensionarCarta").addEventListener("click", e => {
     redimensionar();
   });
